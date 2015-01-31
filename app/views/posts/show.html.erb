@@ -1,3 +1,5 @@
+<p class="pull-right">[<%= link_to "edit this post", edit_post_path(@post) %>]</p>
+
 <p>
   <%= render @post.categories %>
 </p>
@@ -8,16 +10,3 @@
   <%= @post.description %>
   <hr>
 </p>
-
-
-
-<%= @post.id %>
-<%= @post.url %>
-
-
-<%= @post.creator.username %>
-
-<% @post.comments.each do |comment| %>
-  <%= comment.body %>
-  <%= comment.creator.username %>
-<% end %>
