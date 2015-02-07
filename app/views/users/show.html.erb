@@ -1,0 +1,28 @@
+<%= render "shared/content_title", title: "Profile: #{@user.username}" %>
+
+<div class="well">
+  <dl class="dl-horizontal">
+    <dt>Username:</dt>
+    <dd><%= @user.username %></dd>
+  </dl>
+</div>
+
+
+<h5><%= @user.username %>'s activity:</h5>
+
+<ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "Posts(#{@user.posts.count})", '#posts', "data-toggle" => "tab"%>
+  </li>
+  <li>
+    <%= link_to "Comments(#{@user.comments.count})", '#comments', "data-toggle" => "tab" %>
+  </li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="posts">
+    <%= render @user.posts %>
+  </div>
+  <div class="tab-pane" id="comments">
+    <%= render @user.comments, show_post: true%>
+  </div>
+</div>
