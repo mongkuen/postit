@@ -1,0 +1,15 @@
+<div class="span0 well text-center">
+  <% if logged_in? %>
+    <%= link_to vote_post_path(object, vote: true), method: 'post' do %>
+      <i class="icon-arrow-up"></i>
+    <% end %>
+  <% end %>
+  <br>
+  <%= object.total_votes %> votes
+  <br>
+  <% if logged_in? %>
+    <%= link_to vote_post_path(object, vote: false), method: 'post' do %>
+      <i class="icon-arrow-down"></i>
+    <% end %>
+  <% end %>
+</div>

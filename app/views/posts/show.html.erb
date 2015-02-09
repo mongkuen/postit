@@ -26,4 +26,4 @@
 <% end %>
 
 <h5>Comments:</h5>
-<%= render @post.comments %>
+<%= render @post.comments.sort_by { |comment| comment.total_votes }.reverse %>

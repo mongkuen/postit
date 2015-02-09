@@ -15,6 +15,19 @@ class CommentsController < ApplicationController
     end
   end
 
+  def vote
+    @comment = Comment.find(params[:id])
+    @vote = Vote.new(vote: params[:vote], creator: current_user, voteable: @comment)
+
+    if @vote.save
+      flash[:notice] = "Your vote was counted."
+    else
+      flash[:error] = "Your can only vote on this comment once."
+    end
+
+    redirect_to :back
+  end
+
   private
   def comment_params
     params.require(:comment).permit(:body)
