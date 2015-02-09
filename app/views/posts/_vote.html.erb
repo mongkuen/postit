@@ -1,7 +1,7 @@
-<div class="span0 well text-center">
+<div class="span0 well text-center vote">
   <% if logged_in? %>
     <%= link_to vote_post_path(object, vote: true), method: 'post' do %>
-      <i class="icon-arrow-up"></i>
+      <%= upvote_arrow(object) %>
     <% end %>
   <% end %>
   <br>
@@ -9,7 +9,7 @@
   <br>
   <% if logged_in? %>
     <%= link_to vote_post_path(object, vote: false), method: 'post' do %>
-      <i class="icon-arrow-down"></i>
+      <%= downvote_arrow(object) %>
     <% end %>
   <% end %>
 </div>

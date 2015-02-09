@@ -17,15 +17,19 @@ class CommentsController < ApplicationController
 
   def vote
     @comment = Comment.find(params[:id])
-    @vote = Vote.new(vote: params[:vote], creator: current_user, voteable: @comment)
-
-    if @vote.save
+    votes = @comment.votes.where(creator: current_user)
+    if votes.size == 0
+      @vote = Vote.create(vote: params[:vote], voteable: @comment, creator: current_user)
       flash[:notice] = "Your vote was counted."
+    elsif votes.first[:vote].to_s == params[:vote]
+      @vote = votes.first.update(vote: nil)
+      flash[:notice] = "Your vote was cancelled."
     else
-      flash[:error] = "Your can only vote on this comment once."
+      @vote = votes.first.update(vote: params[:vote])
+      flash[:notice] = "Your vote was counted."
     end
-
     redirect_to :back
+
   end
 
   private

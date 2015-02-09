@@ -38,15 +38,19 @@ class PostsController < ApplicationController
   end
 
   def vote
-    @vote = Vote.new(vote: params[:vote], voteable: @post, creator: current_user)
-
-    if @vote.save
+    votes = @post.votes.where(creator: current_user)
+    if votes.size == 0
+      @vote = Vote.create(vote: params[:vote], voteable: @post, creator: current_user)
       flash[:notice] = "Your vote was counted."
+    elsif votes.first[:vote].to_s == params[:vote]
+      @vote = votes.first.update(vote: nil)
+      flash[:notice] = "Your vote was cancelled."
     else
-      flash[:error] = "Your can only vote on this post once."
+      @vote = votes.first.update(vote: params[:vote])
+      flash[:notice] = "Your vote was counted."
     end
-
     redirect_to :back
+
   end
 
   private
