@@ -1,15 +1,15 @@
 <div class="span0 well text-center vote">
   <% if logged_in? %>
-    <%= link_to vote_post_path(object, vote: true), method: 'post' do %>
-      <%= upvote_arrow(object) %>
+    <%= link_to vote_post_path(object, vote: true), method: 'post', remote: true do %>
+      <span id="<%= object.slug %>_up_arrow"><%= upvote_arrow(object) %></span>
     <% end %>
   <% end %>
   <br>
-  <%= object.total_votes %> votes
+  <span id="<%= object.slug %>_total_votes"><%= object.total_votes %></span> votes
   <br>
   <% if logged_in? %>
-    <%= link_to vote_post_path(object, vote: false), method: 'post' do %>
-      <%= downvote_arrow(object) %>
+    <%= link_to vote_post_path(object, vote: false), method: 'post', remote: true do %>
+    <span id="<%= object.slug %>_down_arrow"><%= downvote_arrow(object) %></span>
     <% end %>
   <% end %>
 </div>

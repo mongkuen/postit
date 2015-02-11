@@ -1,0 +1,5 @@
+$('#<%= @comment.id %>_total_votes').html('<%= @comment.total_votes %>');
+
+$("#<%= @comment.id %>_up_arrow").html("<%= upvote_arrow(@comment) %>");
+
+$("#<%= @comment.id %>_down_arrow").html("<%= downvote_arrow(@comment) %>");

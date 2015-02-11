@@ -1,0 +1,5 @@
+$('#<%= @post.slug %>_up_arrow').html("<%= upvote_arrow(@post) %>");
+
+$('#<%= @post.slug %>_total_votes').html("<%= @post.total_votes %>");
+
+$('#<%= @post.slug %>_down_arrow').html("<%= downvote_arrow(@post) %>");

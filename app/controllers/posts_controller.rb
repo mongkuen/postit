@@ -41,16 +41,20 @@ class PostsController < ApplicationController
     votes = @post.votes.where(creator: current_user)
     if votes.size == 0
       @vote = Vote.create(vote: params[:vote], voteable: @post, creator: current_user)
-      flash[:notice] = "Your vote was counted."
     elsif votes.first[:vote].to_s == params[:vote]
       @vote = votes.first.update(vote: nil)
-      flash[:notice] = "Your vote was cancelled."
     else
       @vote = votes.first.update(vote: params[:vote])
-      flash[:notice] = "Your vote was counted."
     end
-    redirect_to :back
 
+    respond_to do |format|
+      format.html {
+        flash[:notice] = "Your vote was counted."
+        redirect_to :back
+      }
+
+      format.js {}
+    end
   end
 
   private
@@ -59,7 +63,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by(slug: params[:id])
   end
 
 end
