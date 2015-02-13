@@ -1,5 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :require_admin, only: [:new, :create]
+  before_action only: [:show] do
+    nonexistant_redirect(Category)
+  end
 
   def new
     @category = Category.new

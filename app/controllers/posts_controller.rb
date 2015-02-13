@@ -4,6 +4,9 @@ class PostsController < ApplicationController
   before_action only: [:edit, :update] do
     restrict_post_edit(@post)
   end
+  before_action only: [:show, :edit, :update, :vote] do
+    nonexistant_redirect(Post)
+  end
 
   def index
     @posts = Post.all.sort_by { |post| post.total_votes }.reverse

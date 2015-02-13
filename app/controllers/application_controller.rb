@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?, :admin?, :creator?
 
+  def nonexistant_redirect(obj)
+    if !obj.find_by(slug: params[:id])
+      flash[:error] = "That doesn't exist."
+      redirect_to root_path
+    end
+  end
+
   def deny_access(msg)
     flash[:error] = "#{msg}"
     redirect_to root_path
