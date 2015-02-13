@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:show, :index]
+  before_action only: [:edit, :update] do
+    restrict_post_edit(@post)
+  end
 
   def index
     @posts = Post.all.sort_by { |post| post.total_votes }.reverse
