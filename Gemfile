@@ -14,7 +14,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '~> 3.0.0'
-gem 'postit_voteable', path: "/Users/mong/nitrous/stacatto/postit_webapp/postit-gems/voteable"
 
 group :doc do
   gem 'sdoc', require: false
