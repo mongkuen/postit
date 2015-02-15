@@ -54,12 +54,11 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {
+      format.html do
         flash[:notice] = "Your vote was counted."
         redirect_to :back
-      }
-
-      format.js {}
+      end
+      format.js
     end
   end
 
